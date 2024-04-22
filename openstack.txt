@@ -1,0 +1,7 @@
+
+sudo useradd -s /bin/bash -d/opt/stack -m stack 
+sudo chmod +x /opt/stack 
+sudo echo"stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+git clone https://opendev.org/openstack/devstack -b stable/zed
+./stack.sh
+Remove os-testr==3.0.0 ( line should be removed when error occurs and run again )
