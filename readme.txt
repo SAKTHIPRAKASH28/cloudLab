@@ -1,4 +1,48 @@
-KVM:
+Additionals: cloud-lab-ten.vercel.app
+
+1. Firebase (Used Firebase DB for CRUD and Firebase Auth): Use the files below, and use http-server (npm i -g http-server and http-server --open); for additionals use firebasse1.txt file in the same repo root below.
+---
+2. Cloud Analyst:
+
+- Download the package from this link: http://www.cloudbus.org/cloudsim/CloudAnalyst.zip
+- Unzip, and run the run.bat file inside it
+- Run Simulation - Initial Output
+- In Configure Simulation, go to Data Center Simulation
+- Click on Add New, then on clicking that record -> Open Physical Hardware Details of Data Center
+- Click on that ID value, then on copies to make -> use 20
+- Then in Advanced, scroll down to find: Load balancing policy -> Alter that
+- Main Configuration -> Application Deployment Configuration -> Add New in Service Broker Policy
+- Save and Load the configuration
+---
+3. Open Stack:
+
+- Open terminal
+	Check Date and time are correct
+- sudo nano /etc/resolv.conf
+	nameserver 10.184.0.11
+- sudo useradd -s /bin/bash -d /opt/stack -m stack
+- sudo chmod +x /opt/stack
+- sudo echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+- sudo -u stack -i
+- sudo apt install git sudo
+- git clone https://opendev.org/openstack/devstack -b stable/zed
+- cd devstack/
+- nano local.conf
+	[[local|localrc]]
+	ADMIN_PASSWORD=admin
+	DATABASE_PASSWORD=$ADMIN_PASSWORD
+	RABBIT_PASSWORD=$ADMIN_PASSWORD
+	SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+	HOST_IP=10.184.61.183 <Your Machine IP>
+- ./stack.sh
+- (If any errors) Remove os-testr==3.0.0
+	nano /opt/stack/requirements/upper-constraints.txt
+  ./stack.sh
+---
+4. Cloud Sim:
+---
+5. KVM:
 
 --> KVM Installation
 ### Check for proper environment
@@ -48,4 +92,3 @@ B) Bridge Network
 11. sudo ip route add default via 10.184.43.157
 
 ---
-
